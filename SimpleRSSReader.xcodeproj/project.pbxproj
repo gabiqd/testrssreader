@@ -12,6 +12,8 @@
 		06A948582517FE0C007C8775 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A948572517FE0C007C8775 /* LoginViewController.swift */; };
 		06A9485D2517FE12007C8775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06A9485C2517FE12007C8775 /* Assets.xcassets */; };
 		06A948602517FE12007C8775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06A9485E2517FE12007C8775 /* LaunchScreen.storyboard */; };
+		06A94868251801E2007C8775 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A94867251801E2007C8775 /* BaseNavigationController.swift */; };
+		06A9486A25180329007C8775 /* AppPersonalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A9486925180329007C8775 /* AppPersonalization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		06A9485C2517FE12007C8775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06A9485F2517FE12007C8775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06A948612517FE12007C8775 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06A94867251801E2007C8775 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		06A9486925180329007C8775 /* AppPersonalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPersonalization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,32 @@
 		06A948522517FE0C007C8775 /* SimpleRSSReader */ = {
 			isa = PBXGroup;
 			children = (
-				06A948532517FE0C007C8775 /* AppDelegate.swift */,
-				06A948552517FE0C007C8775 /* SceneDelegate.swift */,
-				06A948572517FE0C007C8775 /* LoginViewController.swift */,
+				06A9486C251803FD007C8775 /* Utils */,
+				06A9486B251803F6007C8775 /* ViewControllers */,
 				06A9485C2517FE12007C8775 /* Assets.xcassets */,
 				06A9485E2517FE12007C8775 /* LaunchScreen.storyboard */,
 				06A948612517FE12007C8775 /* Info.plist */,
 			);
 			path = SimpleRSSReader;
+			sourceTree = "<group>";
+		};
+		06A9486B251803F6007C8775 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				06A948572517FE0C007C8775 /* LoginViewController.swift */,
+				06A94867251801E2007C8775 /* BaseNavigationController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		06A9486C251803FD007C8775 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				06A948532517FE0C007C8775 /* AppDelegate.swift */,
+				06A948552517FE0C007C8775 /* SceneDelegate.swift */,
+				06A9486925180329007C8775 /* AppPersonalization.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +156,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A9486A25180329007C8775 /* AppPersonalization.swift in Sources */,
+				06A94868251801E2007C8775 /* BaseNavigationController.swift in Sources */,
 				06A948582517FE0C007C8775 /* LoginViewController.swift in Sources */,
 				06A948542517FE0C007C8775 /* AppDelegate.swift in Sources */,
 				06A948562517FE0C007C8775 /* SceneDelegate.swift in Sources */,
