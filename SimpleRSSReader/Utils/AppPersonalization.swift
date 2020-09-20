@@ -8,7 +8,14 @@
 
 import UIKit
 
-extension UIColor{
+extension UIColor {
+    static let primaryColor = UIColor(named: "primaryColorScheme") ?? blue
+    static let secondaryColor = UIColor(named: "secondaryColorScheme") ?? brown
     static let textColor = UIColor(named: "textColorScheme") ?? black
     static let backgroundColor = UIColor(named: "backgroundColorScheme") ?? white
+}
+
+extension UIFont {
+    static let titleFont = UIFont.systemFont(ofSize: 32.0, weight: .bold)
+    static let descriptionFont = UIFont.systemFont(ofSize: 16.0, weight: .medium)
 }
