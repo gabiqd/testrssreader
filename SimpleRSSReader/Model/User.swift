@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct UserCodable: Codable {
+    let user, password: String
+}
+
 struct User: Decodable {
     var accessToken: String
     var userId: Int?

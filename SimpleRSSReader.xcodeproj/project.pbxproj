@@ -22,6 +22,8 @@
 		06A9487C25184FE2007C8775 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A9487B25184FE2007C8775 /* NetworkManager.swift */; };
 		06A9487E25185008007C8775 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A9487D25185008007C8775 /* NetworkError.swift */; };
 		06A948802518502F007C8775 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A9487F2518502F007C8775 /* NetworkResponse.swift */; };
+		06A948862518550C007C8775 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A948852518550C007C8775 /* RSSFeed.swift */; };
+		06A9488825185730007C8775 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A9488725185730007C8775 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		06A9487B25184FE2007C8775 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		06A9487D25185008007C8775 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		06A9487F2518502F007C8775 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		06A948852518550C007C8775 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		06A9488725185730007C8775 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				06A9486E25180500007C8775 /* StyledButton.swift */,
+				06A9488725185730007C8775 /* CardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				06A9487325180FAD007C8775 /* User.swift */,
+				06A948852518550C007C8775 /* RSSFeed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 				06A9486F25180500007C8775 /* StyledButton.swift in Sources */,
 				06A9486A25180329007C8775 /* AppPersonalization.swift in Sources */,
 				06A94879251812BC007C8775 /* Endpoints.swift in Sources */,
+				06A948862518550C007C8775 /* RSSFeed.swift in Sources */,
 				06A94868251801E2007C8775 /* BaseNavigationController.swift in Sources */,
 				06A9487C25184FE2007C8775 /* NetworkManager.swift in Sources */,
 				06A948582517FE0C007C8775 /* LoginViewController.swift in Sources */,
@@ -224,6 +231,7 @@
 				06A948562517FE0C007C8775 /* SceneDelegate.swift in Sources */,
 				06A9487E25185008007C8775 /* NetworkError.swift in Sources */,
 				06A9487725181083007C8775 /* UserViewModel.swift in Sources */,
+				06A9488825185730007C8775 /* CardView.swift in Sources */,
 				06A94871251806D2007C8775 /* Dimens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

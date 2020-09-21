@@ -8,10 +8,6 @@
 
 import WebKit
 
-struct UserCodable: Codable {
-    let user, password: String
-}
-
 class UserViewModel {
     private(set) var accessToken = ""
     private let networkManager = NetworkManager()
@@ -40,20 +36,3 @@ class UserViewModel {
         }
     }
 }
-
-
-
-
-
-
-
-struct RSSFeedCodable: Codable {
-    let url: String
-}
-
-struct RSSFeed: Decodable{
-    var id: String
-    var title: String
-    var url: String
-}
-
