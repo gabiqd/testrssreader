@@ -15,6 +15,9 @@ class LoginViewController: UIViewController {
     private var passwordTextField: UITextField!
     private var loginButton: StyledButton!
     private var registerButton: StyledButton!
+    private var activityIndicator: UIActivityIndicatorView!
+    
+    private var userViewModel = UserViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +72,7 @@ class LoginViewController: UIViewController {
             let loginButton = StyledButton()
             loginButton.translatesAutoresizingMaskIntoConstraints = false
             loginButton.setTitle("Login", for: .normal)
+            loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
             
             return loginButton
         }()
@@ -77,8 +81,17 @@ class LoginViewController: UIViewController {
             let registerButton = StyledButton()
             registerButton.translatesAutoresizingMaskIntoConstraints = false
             registerButton.setTitle("Register", for: .normal)
+            registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
             
             return registerButton
+        }()
+        
+        activityIndicator = {
+            let activityIndicator = UIActivityIndicatorView()
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.isHidden = true
+            
+            return activityIndicator
         }()
     }
     
@@ -89,6 +102,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(passwordTextField)
         self.view.addSubview(loginButton)
         self.view.addSubview(registerButton)
+        self.view.addSubview(activityIndicator)
         
         NSLayoutConstraint.activate(
             [
@@ -143,5 +157,30 @@ class LoginViewController: UIViewController {
                 registerButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -Dimens.l.value)
             ]
         )
+        
+        NSLayoutConstraint.activate(
+            [
+                activityIndicator.heightAnchor.constraint(equalToConstant: 32.0),
+                activityIndicator.widthAnchor.constraint(equalToConstant: 32.0),
+                activityIndicator.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+                activityIndicator.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            ]
+        )
+    }
+    
+    @objc func loginButtonPressed() {
+        activityIndicator.isHidden = false
+        userViewModel.loginUser(username: usernameTextField.text!, password: passwordTextField.text!) {[weak self] (errorMessage) in
+            self?.activityIndicator.isHidden = true
+            if let errorMessage = errorMessage { print(errorMessage) }
+        }
+    }
+    
+    @objc func registerButtonPressed() {
+        activityIndicator.isHidden = false
+        userViewModel.registerUser(username: usernameTextField.text!, password: passwordTextField.text!) {[weak self] (errorMessage) in
+            self?.activityIndicator.isHidden = true
+            if let errorMessage = errorMessage { print(errorMessage) }
+        }
     }
 }
