@@ -13,9 +13,12 @@ extension UIColor {
     static let secondaryColor = UIColor(named: "secondaryColorScheme") ?? brown
     static let textColor = UIColor(named: "textColorScheme") ?? black
     static let backgroundColor = UIColor(named: "backgroundColorScheme") ?? white
+    static let cardBackgroundColorScheme = UIColor(named: "cardBackgroundColorScheme") ?? white
 }
 
 extension UIFont {
     static let titleFont = UIFont.systemFont(ofSize: 32.0, weight: .bold)
     static let descriptionFont = UIFont.systemFont(ofSize: 16.0, weight: .medium)
+    
+    static let titleCellFont = UIFont.systemFont(ofSize: 16.0, weight: .bold)
 }
