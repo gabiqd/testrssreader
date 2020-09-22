@@ -9,7 +9,6 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    private var titleLabel: UILabel!
     private var descriptionLabel: UILabel!
     private var usernameTextField: UITextField!
     private var passwordTextField: UITextField!
@@ -19,24 +18,23 @@ class LoginViewController: UIViewController {
     
     private var userViewModel = UserViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Log in"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .backgroundColor
         initViews()
         setUpConstraints()
+        
+        definesPresentationContext = true
     }
     
     func initViews() {
-        titleLabel = {
-            let titleLabel = UILabel()
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.text = "RSS Reader"
-            titleLabel.font = UIFont.titleFont
-            titleLabel.sizeToFit()
-            titleLabel.textColor = UIColor.textColor
-            
-            return titleLabel
-        }()
         
         descriptionLabel = {
             let descriptionLabel = UILabel()
@@ -90,13 +88,14 @@ class LoginViewController: UIViewController {
             let activityIndicator = UIActivityIndicatorView()
             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
             activityIndicator.isHidden = true
+            let transfrom = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+            activityIndicator.transform = transfrom
             
             return activityIndicator
         }()
     }
     
     func setUpConstraints(){
-        self.view.addSubview(titleLabel)
         self.view.addSubview(descriptionLabel)
         self.view.addSubview(usernameTextField)
         self.view.addSubview(passwordTextField)
@@ -106,16 +105,7 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate(
             [
-                titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: Dimens.m.value),
-                titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -Dimens.m.value),
-                titleLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: Dimens.m.value),
-                titleLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -Dimens.m.value)
-            ]
-        )
-        
-        NSLayoutConstraint.activate(
-            [
-                descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Dimens.m.value),
+                descriptionLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: Dimens.m.value),
                 descriptionLabel.bottomAnchor.constraint(equalTo: usernameTextField.topAnchor, constant: -Dimens.m.value),
                 descriptionLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: Dimens.m.value),
                 descriptionLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -Dimens.m.value)
@@ -143,7 +133,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate(
             [
                 loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Dimens.l.value),
-                loginButton.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -Dimens.m.value),
+                loginButton.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -Dimens.s.value),
                 loginButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: Dimens.l.value),
                 loginButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -Dimens.l.value)
             ]
@@ -151,7 +141,7 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate(
             [
-                registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Dimens.m.value),
+                registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Dimens.s.value),
                 registerButton.bottomAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.m.value),
                 registerButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: Dimens.l.value),
                 registerButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -Dimens.l.value)
@@ -160,27 +150,51 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate(
             [
-                activityIndicator.heightAnchor.constraint(equalToConstant: 32.0),
-                activityIndicator.widthAnchor.constraint(equalToConstant: 32.0),
-                activityIndicator.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+                activityIndicator.heightAnchor.constraint(equalToConstant: Dimens.l.value),
+                activityIndicator.widthAnchor.constraint(equalToConstant: Dimens.l.value),
+                activityIndicator.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: Dimens.m.value),
                 activityIndicator.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
             ]
         )
     }
     
     @objc func loginButtonPressed() {
-        activityIndicator.isHidden = false
+        self.startLoading()
         userViewModel.loginUser(username: usernameTextField.text!, password: passwordTextField.text!) {[weak self] (errorMessage) in
-            self?.activityIndicator.isHidden = true
-            if let errorMessage = errorMessage { print(errorMessage) }
+            
+            DispatchQueue.main.async {
+                self?.stopLoading()
+                
+                guard let self = self else { return }
+                if let errorMessage = errorMessage { self.showAlert(title: "Ups!", message: errorMessage); return}
+                
+                self.navigationController?.pushViewController(RSSFeedViewController(userViewModel: self.userViewModel), animated: true)
+            }
         }
     }
     
     @objc func registerButtonPressed() {
-        activityIndicator.isHidden = false
+        self.startLoading()
         userViewModel.registerUser(username: usernameTextField.text!, password: passwordTextField.text!) {[weak self] (errorMessage) in
-            self?.activityIndicator.isHidden = true
-            if let errorMessage = errorMessage { print(errorMessage) }
+            
+            DispatchQueue.main.async {
+                self?.stopLoading()
+                
+                guard let self = self else { return }
+                if let errorMessage = errorMessage { self.showAlert(title: "Ups!", message: errorMessage); return}
+                
+                self.navigationController?.pushViewController(RSSFeedViewController(userViewModel: self.userViewModel), animated: true)
+            }
         }
+    }
+    
+    func startLoading() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
 }

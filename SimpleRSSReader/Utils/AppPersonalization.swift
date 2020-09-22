@@ -19,6 +19,7 @@ extension UIColor {
 extension UIFont {
     static let titleFont = UIFont.systemFont(ofSize: 32.0, weight: .bold)
     static let descriptionFont = UIFont.systemFont(ofSize: 16.0, weight: .medium)
+    static let urlFont = UIFont.systemFont(ofSize: 14.0, weight: .light)
     
     static let titleCellFont = UIFont.systemFont(ofSize: 16.0, weight: .bold)
 }

@@ -1,5 +1,5 @@
 //
-//  RSSFeed.swift
+//  RSSArticle.swift
 //  SimpleRSSReader
 //
 //  Created by Gabriel on 21/09/2020.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct RSSFeedCodable: Codable {
-    let url: String
-}
-
-struct RSSFeed: Decodable, Equatable{
+struct RSSArticle: Decodable{
     var id: Int
     var title: String
     var url: String
+    var summary: String
+    var content: String
+    var date: String
+    var readBy: [Int]
+    var loaded: String
 }
-

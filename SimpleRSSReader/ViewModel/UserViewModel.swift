@@ -12,6 +12,10 @@ class UserViewModel {
     private(set) var accessToken = ""
     private let networkManager = NetworkManager()
     
+    func logOutCurrentUset() {
+        accessToken = ""
+    }
+    
     func registerUser(username: String, password: String, completition: @escaping (_ errorMessage: String?)->()) {
         networkManager.registerUser(withUser: username, password: password) {[weak self] (result) in
             switch result{

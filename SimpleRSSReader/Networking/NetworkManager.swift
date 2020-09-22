@@ -8,14 +8,12 @@
 
 import WebKit
 
+struct Message: Decodable {
+    var message: String
+}
+
 class NetworkManager {
-    func registerUser(withUser username: String, password: String, completition: @escaping (Result<User,NetworkError>) -> ()) {
-        logInOrRegisterRequest(endpoint: .register, username: username, password: password, completition: completition)
-    }
-    
-    func loginUser(withUser username: String, password: String, completition: @escaping (Result<User,NetworkError>) -> ()) {
-        logInOrRegisterRequest(endpoint: .logIn, username: username, password: password, completition: completition)
-    }
+    typealias UserCompletition = (Result<User,NetworkError>) -> ()
     
     private func prepareBodyJson<T: Encodable>(codable: T) -> Data? {
         var jsonData: Data
@@ -26,6 +24,14 @@ class NetworkManager {
         }
         
         return jsonData
+    }
+    
+    func registerUser(withUser username: String, password: String, completition: @escaping UserCompletition) {
+        logInOrRegisterRequest(endpoint: .register, username: username, password: password, completition: completition)
+    }
+    
+    func loginUser(withUser username: String, password: String, completition: @escaping UserCompletition) {
+        logInOrRegisterRequest(endpoint: .logIn, username: username, password: password, completition: completition)
     }
     
     private func logInOrRegisterRequest(endpoint: Endpoints, username: String, password: String, completition: @escaping (Result<User,NetworkError>) -> ()) {
@@ -56,6 +62,9 @@ class NetworkManager {
             
             let response = NetworkResponse(data: data)
             guard let decodedUser = response.decode(User.self) else {
+                if let decodedMessage = response.decode(Message.self) {
+                    completition(.failure(.serverMessage(message: decodedMessage.message)))
+                }
                 completition(.failure(.decodingError))
                 return
             }

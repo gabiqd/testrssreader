@@ -21,7 +21,12 @@ class BaseNavigationController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBar.isHidden = true
+        self.navigationBar.tintColor = UIColor.primaryColor
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.prefersLargeTitles = true
+        
+        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidLoad() {

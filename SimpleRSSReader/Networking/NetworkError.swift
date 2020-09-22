@@ -11,6 +11,7 @@ enum NetworkError: Error {
     case decodingError
     case requestError
     case nilDataResponseError
+    case serverMessage(message: String)
     
     var message: String{
         switch self{
@@ -22,6 +23,8 @@ enum NetworkError: Error {
             return "An error doing the request ocurred"
         case .nilDataResponseError:
             return "We have received an empty response"
+        case .serverMessage(let message):
+            return message
         }
     }
 }

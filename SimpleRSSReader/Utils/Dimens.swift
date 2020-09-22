@@ -9,12 +9,15 @@
 import UIKit
 
 enum Dimens {
+    case xs
     case s
     case m
     case l
     
     var value: CGFloat {
         switch self {
+        case .xs:
+            return 8.0
         case .s:
             return 16.0
         case .m:
